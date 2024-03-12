@@ -1,0 +1,103 @@
+<Section class="Banner-section">
+    <div class="image-container">
+        {% for block in section.blocks %}
+            {% if block.settings.image !=blank %}
+                <div class="image_div">
+                    <img class="d-img" src="{{ block.settings.image |  img_url: 'master' }}" alt="">
+                    {% if block.settings.image_m !=blank %}
+                        <img class="m-img" src="{{ block.settings.image_m |  img_url: 'master' }}" alt="">
+                    {% endif %}
+                    <div class="banner-content b-content-{{ block.id }}"  style="justify-content:{{ block.settings.horizontal_alignment }}" >
+                        <div class="heading_subheading_btn" style="text-align:{{ block.settings.horizontal_alignment }};">
+                            {% if block.settings.subheading !=blank %}
+                                <h4>{{ block.settings.subheading }}</h4>
+                            {% endif %}
+                            {% if block.settings.heading !=blank %}
+                                <h2>{{ block.settings.heading }}</h2>
+                            {% endif %}
+                            {% if block.settings.btn_label !=blank %}
+                                <a class="cus_btn" href="{{ block.settings.btn_url }}">{{ block.settings.btn_label }}</a>
+                            {% endif %}
+                        </div>
+                    </div> 
+                </div> 
+                {% else %}
+                {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+        {% endfor %}
+    </div>
+</Section>
+
+
+
+{% schema %}
+    {
+      "name": "text with images",
+      "settings": [
+
+      ],
+      "blocks": [
+        {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+            {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+            },
+            {
+            "type": "image_picker",
+            "id": "image_m",
+            "label": "Mobile Image"
+            },
+            {
+            "type": "text",
+            "id": "subheading",
+            "label": "subheading"
+            },
+            {
+            "type": "text",
+            "id": "heading",
+            "label": "heading"
+            },
+            {
+            "type": "text",
+            "id": "btn_label",
+            "label": "button label"
+            },
+            {
+            "type": "url",
+            "id": "btn_url",
+            "label": "button url"
+            },
+            {
+            "type": "select",
+            "id": "horizontal_alignment",
+            "label": "Horizontal alignment",
+            "options": [
+                {
+                "value": "left",
+                "label": "left"
+                },
+                {
+                "value": "center",
+                "label": "center"
+                },
+                {
+                "value": "right",
+                "label": "right"
+                }
+            ]
+            }
+
+        ]
+        }
+    ],
+      "presets": [
+        {
+          "name": "Banner slider"
+        }
+      ]
+    }
+  {% endschema %}
