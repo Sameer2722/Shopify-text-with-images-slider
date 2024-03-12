@@ -1,0 +1,1 @@
+# Shopify-text-with-images-slider
